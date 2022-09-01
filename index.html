@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
+    />
+
+    <!-- CSS Reset -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+    />
+
+    <!-- Milligram CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"
+    />
+    <title>Lean Vue - User List</title>
+    <style>
+      tr:hover {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
+        <h1>Hallo {{ fullName }}</h1>
+        <h2>Userlist</h2>
+        <form>
+          <label for="search">Search</label>
+          <input id="search" v-model="searchQueryString" type="text" />
+          {{ searchQueryString }}
+        </form>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Username</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <template v-for="user of userList">
+              <tr @click="showDetails(user.id)">
+                <td>{{ user.name }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+              </tr>
+              <tr v-show="user.showDetails">
+                <td colspan="3">
+                  <ul>
+                    <li>street: {{ user.address.street }}</li>
+                    <li>city: {{ user.address.city }}</li>
+                    <li>zipcode: {{ user.address.zipcode }}</li>
+                  </ul>
+                </td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
